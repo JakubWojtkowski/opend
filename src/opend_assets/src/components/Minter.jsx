@@ -5,7 +5,10 @@ function Minter() {
   const { register, handleSubmit } = useForm();
 
   async function onSubmit(data) {
-    console.log(data.upload);
+    const name = data.name;
+    const image = data.image[0];
+    const imageArray = await image.arrayBuffer();
+    const imageByteDate = [...new Uint8Array(imageArray)];
   }
 
   return (
@@ -19,7 +22,7 @@ function Minter() {
       <form className="makeStyles-form-109" noValidate="" autoComplete="off">
         <div className="upload-container">
           <input
-            {...register("upload", { required: true })}
+            {...register("image", { required: true })}
             className="upload"
             type="file"
             accept="image/x-png,image/jpeg,image/gif,image/svg+xml,image/webp"
