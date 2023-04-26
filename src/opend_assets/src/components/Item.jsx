@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Actor, HttpAgent } from "@dfinity/agent";
 import { idlFactory } from "../../../declarations/nft/index";
+import Button from "./Button";
 
 function Item(props) {
   const [name, setName] = useState();
   const [owner, setOwner] = useState();
   const [image, setImage] = useState();
+  const [button, setButton] = useState();
+  const [priceInput, setPriceInput] = useState();
 
   const id = props.id;
 
@@ -29,14 +32,31 @@ function Item(props) {
     const imageDate = await NFTActor.getAsset();
     const imageContent = new Uint8Array(imageDate);
     const image = URL.createObjectURL(
-      new Blob([imageContent.buffer], {type: "image/png"})
+      new Blob([imageContent.buffer], { type: "image/png" })
     );
     setImage(image);
+
+    setButton(<Button handleClick={handleSell} text={"Sell"}/>);
   }
 
   useEffect(() => {
     loadNFT();
   }, []); // it's going to be called once
+
+  let price;
+  function handleSell() {
+    console.log("click");
+    setPriceInput(
+      <input
+        placeholder="Price in BTC"
+        type="number"
+        className="price-input"
+        value={price}
+        onChange={(e) => (price = e.target.value)}
+      />
+    );
+    setButton(<Button handleClick={handleSell} text={"Confirm"}/>);
+  }
 
   return (
     <div className="disGrid-item">
@@ -53,6 +73,8 @@ function Item(props) {
           <p className="disTypography-root makeStyles-bodyText-24 disTypography-body2 disTypography-colorTextSecondary">
             Owner: {owner}
           </p>
+          {priceInput}
+          {button}
         </div>
       </div>
     </div>
