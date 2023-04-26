@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Actor, HttpAgent } from "@dfinity/agent";
 import { idlFactory } from "../../../declarations/nft/index";
-import { Principal } from "@dfinity/principal";
 
 function Item(props) {
   const [name, setName] = useState();
   const [owner, setOwner] = useState();
   const [image, setImage] = useState();
 
-  const id = Principal.fromText(props.id);
+  const id = props.id;
 
   const localHost = "http://localhost:8080";
   const agent = new HttpAgent({
