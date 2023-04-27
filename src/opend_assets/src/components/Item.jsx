@@ -58,6 +58,9 @@ function Item(props) {
     setButton(<Button handleClick={handleSell} text={"Confirm"}/>);
   }
 
+  async function sellItem() {
+  };
+
   return (
     <div className="disGrid-item">
       <div className="disPaper-root disCard-root makeStyles-root-17 disPaper-elevation1 disPaper-rounded">

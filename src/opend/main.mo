@@ -8,6 +8,8 @@ import List "mo:base/List";
 
 actor OpenD {
 
+
+
     var mapOfNFTs = HashMap.HashMap<Principal, NFTActorClass.NFT>(1, Principal.equal, Principal.hash);
     var mapOfOwners = HashMap.HashMap<Principal, List.List<Principal>>(1, Principal.equal, Principal.hash);
 
@@ -43,5 +45,9 @@ actor OpenD {
         };
 
         return List.toArray(userNFTs);
+    };
+
+    public shared (msg) func listItem(id : Principal, price: Nat) {
+
     };
 };
