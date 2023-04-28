@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Actor, HttpAgent } from "@dfinity/agent";
 import { idlFactory } from "../../../declarations/nft/index";
+import { opend } from "../../../declarations/opend";
 import Button from "./Button";
 
 function Item(props) {
@@ -55,10 +56,13 @@ function Item(props) {
         onChange={(e) => (price = e.target.value)}
       />
     );
-    setButton(<Button handleClick={handleSell} text={"Confirm"}/>);
+    setButton(<Button handleClick={sellItem} text={"Confirm"}/>);
   }
 
   async function sellItem() {
+    console.log(price);
+    const listingResult = await opend.sellItem(props.id, Number(price));
+    console.log(listingResult);
   };
 
   return (
@@ -77,7 +81,7 @@ function Item(props) {
             Owner: {owner}
           </p>
           {priceInput}
-          {button}
+          {/* {button} */}
         </div>
       </div>
     </div>
