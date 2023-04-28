@@ -17,6 +17,7 @@ function Item(props) {
   const agent = new HttpAgent({
     host: localHost,
   });
+  agent.fetchRootKey(); // when deploy live then remove this line
   let NFTActor;
 
   async function loadNFT() {
@@ -62,7 +63,7 @@ function Item(props) {
 
   async function sellItem() {
     console.log(price);
-    const listingResult = await opend.sellItem(props.id, Number(price));
+    const listingResult = await opend.listItem(props.id, Number(price));
     console.log(listingResult);
     if (listingResult == "Success") {
       const openDId = await opend.getOpenDCanisterID();
@@ -87,7 +88,7 @@ function Item(props) {
             Owner: {owner}
           </p>
           {priceInput}
-          {/* {button} */}
+          {button}
         </div>
       </div>
     </div>
