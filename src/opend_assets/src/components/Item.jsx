@@ -17,9 +17,10 @@ function Item(props) {
   const agent = new HttpAgent({
     host: localHost,
   });
+  let NFTActor;
 
   async function loadNFT() {
-    const NFTActor = await Actor.createActor(idlFactory, {
+    NFTActor = await Actor.createActor(idlFactory, {
       agent,
       canisterId: id,
     });
@@ -63,6 +64,11 @@ function Item(props) {
     console.log(price);
     const listingResult = await opend.sellItem(props.id, Number(price));
     console.log(listingResult);
+    if (listingResult == "Success") {
+      const openDId = await opend.getOpenDCanisterID();
+      const transferResult = await NFTActor.transferOwnership(openDId);
+      console.log(transferResult);
+    }
   };
 
   return (
