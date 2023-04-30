@@ -52,7 +52,7 @@ actor OpenD {
         return List.toArray(userNFTs);
     };
 
-     public query func getListedNFTs() : async [Principal] {
+    public query func getListedNFTs() : async [Principal] {
         let ids = Iter.toArray(mapOfListings.keys());
         return ids;
     };
@@ -87,5 +87,14 @@ actor OpenD {
         } else {
             return true;
         };
+    };
+
+    public query func getOriginalOwner(id : Principal) : async Principal {
+        var listing : Listing = switch (mapOfListings.get(id)) {
+            case null return Principal.fromText("");
+            case (?result) result;
+        };
+
+        return listing.itemOwner;
     };
 };

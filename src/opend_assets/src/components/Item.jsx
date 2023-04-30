@@ -42,14 +42,19 @@ function Item(props) {
     );
     setImage(image);
 
-    const nftIsListed = await opend.isListed(props.id);
+    if (props.role == "collection") {
+      const nftIsListed = await opend.isListed(props.id);
 
-    if (nftIsListed) {
-      setOwner("OpenD");
-      setBlur({ filter: "blur(4px)" });
-      setSellStatus("Listed");
-    } else {
-      setButton(<Button handleClick={handleSell} text={"Sell"} />);
+      if (nftIsListed) {
+        setOwner("OpenD");
+        setBlur({ filter: "blur(4px)" });
+        setSellStatus("Listed");
+      } else {
+        setButton(<Button handleClick={handleSell} text={"Sell"} />);
+      }
+    } else if (props.role == "discover") {
+      const originalOwner = 
+      setButton(<Button handleClick={handleBuy} text={"Buy"} />);
     }
   }
 
@@ -59,7 +64,6 @@ function Item(props) {
 
   let price;
   function handleSell() {
-    console.log("click");
     setPriceInput(
       <input
         placeholder="Price in BTC"
@@ -90,6 +94,10 @@ function Item(props) {
         setSellStatus("Listed");
       }
     }
+  }
+
+  async function handleBuy() {
+    console.log("buy button was triggered");
   }
 
   return (
