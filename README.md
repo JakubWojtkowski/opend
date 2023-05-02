@@ -88,13 +88,6 @@ http://localhost:8080/
       />
 ```
 
-# Price Label HTML
-
-```
-<div className="disButtonBase-root disChip-root makeStyles-price-23 disChip-outlined">
-          <span className="disChip-label">23 DANG</span>
-        </div>
-```
 
 # Creating NFT for Testing
 
@@ -107,7 +100,7 @@ dfx canister call opend mint '(vec {137; 80; 78; 71; 13; 10; 26; 10; 0; 0; 0; 13
 2. List the item into mapOfListings:
 
 ```
-dfx canister call opend listItem '(principal "<REPLACE WITH NFT CANISTER ID>", 2)'
+dfx canister call opend listItem '(principal "qsgjb-riaaa-aaaaa-aaaga-cai", 2)'
 ```
 
 3. Get OpenD canister ID:
@@ -119,7 +112,7 @@ dfx canister id opend
 4. Transfer NFT to OpenD:
 
 ```
-dfx canister call <REPLACE WITH NFT CANISTER ID> transferOwnership '(principal "<REPLACE WITH OPEND CANISTER ID>", true)'
+dfx canister call qsgjb-riaaa-aaaaa-aaaga-cai transferOwnership '(principal "ryjl3-tyaaa-aaaaa-aaaba-cai", true)'
 ```
 
 # Conneting to the Token Canister
