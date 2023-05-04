@@ -18,6 +18,7 @@ function Item(props) {
   const [blur, setBlur] = useState();
   const [sellStatus, setSellStatus] = useState();
   const [priceLabel, setPriceLabel] = useState();
+  const [shouldDisplay, setShouldDisplay] = useState(true);
 
   const id = props.id;
 
@@ -108,6 +109,7 @@ function Item(props) {
 
   async function handleBuy() {
     console.log("buy was triggered");
+    setLoaderHidden(false);
     const tokenActor = await Actor.createActor(tokenIdlFactory, {
       agent,
       canisterId: Principal.fromText("renrk-eyaaa-aaaaa-aaada-cai"),
@@ -117,11 +119,21 @@ function Item(props) {
     const itemPrice = await opend.getListedNFTPrice(props.id);
 
     const result = await tokenActor.transfer(sellerId, itemPrice);
-    console.log(result);
+    // console.log(transferResult);
+    if (result == "Success") {
+      const transferResult = await opend.completePurchase(
+        props.id,
+        sellerId,
+        CURRENT_USER_ID
+      );
+      console.log("purchase" + transferResult);
+      setLoaderHidden(true);
+      setShouldDisplay(false);
+    }
   }
 
   return (
-    <div className="disGrid-item">
+    <div style={{display: shouldDisplay ? "inline" :"none"}} className="disGrid-item">
       <div className="disPaper-root disCard-root makeStyles-root-17 disPaper-elevation1 disPaper-rounded">
         <img
           className="disCardMedia-root makeStyles-image-19 disCardMedia-media disCardMedia-img"
