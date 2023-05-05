@@ -125,8 +125,9 @@ actor OpenD {
                 ownedNFTs,
                 func(listItemId : Principal) : Bool {
                     return listItemId != id;
-                });
-            
+                },
+            );
+
             addToOwnerShipMap(newOwnerId, id);
             return "Success";
         } else {
