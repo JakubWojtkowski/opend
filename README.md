@@ -1,4 +1,4 @@
-Copyright 2022 London App Brewery LTD (www.appbrewery.com)
+![OpenD data](/Image/opend.png?raw=true "OpenD")
 
 The code in this tutorial project is licended under the Apache License, Version 2.0 (the "License");
 you may not use this project except in compliance with the License.
@@ -124,3 +124,4 @@ dfx canister call qhbym-qaaaa-aaaaa-aaafq-cai transferOwnership '(principal "ryj
 ```
 const dangPrincipal = Principal.fromText("<REPLACE WITH TOKEN CANISTER ID>");
 ```
+Copyright 2022 London App Brewery LTD (www.appbrewery.com)
